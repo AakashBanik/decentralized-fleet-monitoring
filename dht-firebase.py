@@ -42,7 +42,7 @@ def update_firebase():
 
 	temp, hum = get_temp()
 
-	data = {"temp": temp, "humidity": hum}
+	data = {"temp": temp, "humidity": hum, "date": datetime.date.today()}
 	firebase.post('/sensor/dht', data)
 	
 
