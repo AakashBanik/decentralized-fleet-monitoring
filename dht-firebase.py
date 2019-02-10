@@ -24,6 +24,14 @@ humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
 
 firebase = firebase.FirebaseApplication('https://my-pi-12.firebaseio.com/', None)
 
+def sendNotification():
+
+	temp, hum = get_temp()
+
+	if temp > 27.0:
+		sendMail('aakashbanik510@gmail.com', 'Temp/Humidity Exceeded')
+
+
 def get_temp():
 	humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
 	if humidity is not None and temperature is not None:
@@ -46,12 +54,6 @@ def update_firebase():
 	data = {"temp": temp, "humidity": hum, "date": datetime.date.today()}
 	firebase.post('/sensor/dht', data)
 	
-def sendNotification():
-
-	temp, hum = get_temp()
-
-	if (temp > 27 | hum > 70):
-		sendMail('aakashbanik510@gmail.com', 'Temp/Humidity Exceeded')
 
 
 

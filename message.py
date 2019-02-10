@@ -18,12 +18,19 @@ def sendMessage(body, toNumber):
     print(message.sid)
 
 def sendMail(toAddress, message):
-
-    port = 465  # For SSL
-    smtp_server = "smtp.gmail.com"
+#    context = ssl.create_default_context()
+#    port = 465  # For SSL
+#    smtp_server = "smtp.gmail.com"
     sender_email = "aakashbaniktest@gmail.com"  # Enter your address
     password = 'Aakash@12'
-    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
-        server.login(sender_email, password)
-        server.sendmail(sender_email, toAddress, message)
+#    with smtplib.SMTP_SSL(smtp_server, port) as server:
+#        server.login(sender_email, password)
+#        server.sendmail(sender_email, toAddress, message)
+
+    print("Sending Email To Specified User")
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(sender_email, password)
+    server.sendmail(sender_email, toAddress, message)
+    server.quit()
 
