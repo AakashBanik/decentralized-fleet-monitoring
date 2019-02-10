@@ -9,6 +9,7 @@ import urllib2, urllib, httplib
 import json
 import os 
 from functools import partial
+from message import sendMail
 
 GPIO.setmode(GPIO.BCM)
 GPIO.cleanup()
@@ -45,11 +46,20 @@ def update_firebase():
 	data = {"temp": temp, "humidity": hum, "date": datetime.date.today()}
 	firebase.post('/sensor/dht', data)
 	
+def sendNotification():
+
+	temp, hum = get_temp()
+
+	if (temp > 27 | hum > 70):
+		sendMail('aakashbanik510@gmail.com', 'Temp/Humidity Exceeded')
+
+
 
 while True:
-		update_firebase()
-        #sleepTime = int(sleepTime)
-		sleep(5)
+
+	update_firebase()
+    #sleepTime = int(sleepTime)
+	sleep(5)
 	
 
 
