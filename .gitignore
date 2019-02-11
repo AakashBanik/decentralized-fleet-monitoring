@@ -1,2 +1,7 @@
 .idea
 random.py
+server/node_modules
+.vscode
+__pycache__
+server/serviceaccount.json
+server/package-lock.json
