@@ -18,6 +18,7 @@ def sendMessage(body, toNumber):
     print(message.sid)
 
 def sendMail(toAddress, message):
+    #commented lines are for python3, normal uncommented lines are for python2 for raspberry pi support
 #    context = ssl.create_default_context()
 #    port = 465  # For SSL
 #    smtp_server = "smtp.gmail.com"
