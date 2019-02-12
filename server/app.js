@@ -24,7 +24,7 @@ firebase.initializeApp(config);
 var db = firebase.database();
 var ref = db.ref("sensor/dht");
 
-ref.once("value", (snapshot) => {
+ref.on("value", (snapshot) => {
 
   var promise = new Promise((resolve, reject) => {
     var data = []

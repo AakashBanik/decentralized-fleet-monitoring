@@ -5,3 +5,4 @@ server/node_modules
 __pycache__
 server/serviceaccount.json
 server/package-lock.json
+playground

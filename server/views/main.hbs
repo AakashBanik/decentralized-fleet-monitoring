@@ -2,11 +2,31 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <style>
+            div{
+
+                width: 300px;
+                height: 200px;
+
+                position: absolute;
+                top:0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+
+                margin: auto;
+            }
+        </style>
     </head>
 
-    <body>
-        <h3>Today's Date: {{date}}</h3>
-        <h3>Humidity: {{humidity}}</h3>
-        <h3>Temperature: {{temp}}</h3>
+    <body style="background-color:black;">
+        <center>
+            <div style="background-color:black;">
+                <h3 style="color:white">Today's Date: {{date}}</h3>
+                <hr>
+                <h3 style="color:white">Current Temperature: {{temp}} &deg;C</h3>
+                <h3 style="color:white">Current Humidity: {{humidity}}%</h3>
+            </div>
+        </center>
     </body>
 </html>
