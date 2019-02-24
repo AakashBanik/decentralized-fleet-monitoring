@@ -1,6 +1,7 @@
 var firebase = require("firebase");
 var hbs = require('hbs')
 var express = require('express')
+var http = require("http");
 
 var app = express()
 var humidity = []
@@ -50,12 +51,20 @@ ref.on("value", (snapshot) => {
 
 });
 
-app.get('/', (req, res) => {
+app.get('/temp', (req, res) => {
   res.render('main.hbs', {
     date: new Date().toISOString().slice(0, 10).toString(),
-    humidity: humidity[humidity.length - 1],
     temp: Temperature[Temperature.length - 1]
   })
 })
+
+app.get('/hum', (req, res) => {
+  res.render('main.hbs', {
+    date: new Date().toISOString().slice(0, 10).toString(),
+    humidity: humidity[humidity.length - 1]
+  })
+})
+
+
 
 app.listen(port)
