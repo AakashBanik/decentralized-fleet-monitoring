@@ -1,15 +1,18 @@
 var firebase = require("firebase");
 var hbs = require('hbs')
 var express = require('express')
-var http = require("http");
 
 var app = express()
 var humidity = []
 var Temperature = []
+var lat = -34.397
+var long = 150.644
+var mapsApiKey = 'AIzaSyBasFPXZ4mm6Wh_GJestTeZZF8ZMs6wxuc'
 
 const port = process.env.PORT || 3000;
 
 app.set('view engine', 'hbs')
+hbs.registerPartials(__dirname + '/views/partials')
 app.use(express.static(__dirname + '/server/public'))
 
 var config = {
@@ -37,7 +40,7 @@ ref.on("value", (snapshot) => {
   
   promise.then((data) => {
     var datetime = new Date();
-    datetime.setDate(datetime.getDate())
+    datetime.setDate(datetime.getDate());
     todaysDate = datetime.toISOString().slice(0, 10).toString();
     console.log(`Todays Date: ${todaysDate}\n`)
     data.forEach(element => {
@@ -51,20 +54,40 @@ ref.on("value", (snapshot) => {
 
 });
 
+
 app.get('/temp', (req, res) => {
-  res.render('main.hbs', {
+  res.render('temp.hbs', {
     date: new Date().toISOString().slice(0, 10).toString(),
     temp: Temperature[Temperature.length - 1]
   })
 })
 
 app.get('/hum', (req, res) => {
-  res.render('main.hbs', {
+  res.render('hum.hbs', {
     date: new Date().toISOString().slice(0, 10).toString(),
     humidity: humidity[humidity.length - 1]
   })
 })
 
+app.get('/map', (req, res) => {
+  res.render('maps.hbs', {
+    lat: lat,
+    long: long,
+    apiKey: mapsApiKey
+  })
+})
+
+app.get('/vib', (req, res) => {
+  res.render('vibration.hbs', {
+    date: new Date().toISOString().slice(0, 10).toString(),
+  })
+})
+
+app.get('/pre', (req, res) => {
+  res.render('pressure.hbs', {
+    date: new Date().toISOString().slice(0, 10).toString(),
+  })
+})
 
 
 app.listen(port)
