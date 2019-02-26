@@ -1,21 +1,18 @@
-from twilio.rest import Client
 import smtplib, ssl
+import requests
 
 account_sid = 'AC220dfb42781b7a1696980087b049c168'
 auth_token = '12ed26fe4f23d36df63c064e8e79839d'
 client = Client(account_sid, auth_token)
 
 context = ssl.create_default_context()
+API_KEY = 'aPC0UZj6Jpw-VXDs9GniIjZeLWdRJ6AsW15PXooHhI'
 
 def sendMessage(body, toNumber):
 
-    message = client.messages.create(
-    body= body,
-    from_='+16784000661',
-    to= toNumber
-    )
-
-    print(message.sid)
+    reqURL = 'https://api.textlocal.in/send/?apiKey={0}&sender=TXTLCL&numbers={1}&message={2}'.format(API_KEY, toNumber, body) 
+    req = requests.post(reqURL)
+    print(req)
 
 def sendMail(toAddress, message):
     #commented lines are for python3, normal uncommented lines are for python2 for raspberry pi support
