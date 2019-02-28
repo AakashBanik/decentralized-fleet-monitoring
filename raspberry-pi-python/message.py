@@ -1,10 +1,6 @@
 import smtplib, ssl
 import requests
 
-account_sid = 'AC220dfb42781b7a1696980087b049c168'
-auth_token = '12ed26fe4f23d36df63c064e8e79839d'
-client = Client(account_sid, auth_token)
-
 context = ssl.create_default_context()
 API_KEY = 'aPC0UZj6Jpw-VXDs9GniIjZeLWdRJ6AsW15PXooHhI'
 
