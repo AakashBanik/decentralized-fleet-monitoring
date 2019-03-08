@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "495860784595",
+    "firebase_url": "https://mobile-storage-e3c39.firebaseio.com",
+    "project_id": "mobile-storage-e3c39",
+    "storage_bucket": "mobile-storage-e3c39.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:495860784595:android:90d38cae8aa99c4f",
+        "android_client_info": {
+          "package_name": "com.example.fleetmonitoring"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "495860784595-s9o1btqd182frpqapp5m090r057cpdnu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWG6nrjl18zJIxIz37lIKUfPO5mIqv0aw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

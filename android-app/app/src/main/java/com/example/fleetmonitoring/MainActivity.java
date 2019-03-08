@@ -1,4 +1,5 @@
 package com.example.fleetmonitoring;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -8,6 +9,11 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.google.firebase.FirebaseApp;
+
+
+import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,15 +22,20 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout dl;
     private ActionBarDrawerToggle toggle;
     private NavigationView nv;
-    private boolean mapPageSet = false;
+    private boolean mapdashPageSet = false;
+    String packagePath = "/storage/emulated/0/Download/app-debug.apk";
+    File file = new File(packagePath);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        PackageManager pm = getPackageManager();
+
         webview = (WebView) findViewById(R.id.webview);
         webview.getSettings().setJavaScriptEnabled(true);
+        FirebaseApp.initializeApp(this);
 
         webview.loadUrl("https://mysterious-spire-66642.herokuapp.com/temp");
 
@@ -41,32 +52,50 @@ public class MainActivity extends AppCompatActivity {
                 int id = menuItem.getItemId();
                 if (id == R.id.hum){
                     webview.loadUrl("https://mysterious-spire-66642.herokuapp.com/hum");
-                    mapPageSet = false;
+                    mapdashPageSet = false;
                     setTitle("Humidity");
                     dl.closeDrawers();
                 }
                 else if (id == R.id.temp){
                     webview.loadUrl("https://mysterious-spire-66642.herokuapp.com/temp");
-                    mapPageSet = false;
+                    mapdashPageSet = false;
                     setTitle("Temperature");
                     dl.closeDrawers();
                 }
                 else if (id == R.id.location){
                     webview.loadUrl("https://mysterious-spire-66642.herokuapp.com/map");
-                    mapPageSet = true;
+                    mapdashPageSet = true;
                     setTitle("Car Location");
                     dl.closeDrawers();
                 }
-                else if (id == R.id.pressure){
-                    webview.loadUrl("https://mysterious-spire-66642.herokuapp.com/pre");
-                    mapPageSet = false;
-                    setTitle("Pressure");
+                else if (id == R.id.acceleration){
+                    webview.loadUrl("https://mysterious-spire-66642.herokuapp.com/acc");
+                    mapdashPageSet = false;
+                    setTitle("Acceleration");
                     dl.closeDrawers();
                 }
                 else if (id == R.id.vibration){
                     webview.loadUrl("https://mysterious-spire-66642.herokuapp.com/vib");
-                    mapPageSet = false;
+                    mapdashPageSet = false;
                     setTitle("Vibration");
+                    dl.closeDrawers();
+                }
+                else if (id == R.id.gyroscope){
+                    webview.loadUrl("https://mysterious-spire-66642.herokuapp.com/gyp");
+                    mapdashPageSet = false;
+                    setTitle("Gyroscope");
+                    dl.closeDrawers();
+                }
+                else if (id == R.id.magnet){
+                    webview.loadUrl("https://mysterious-spire-66642.herokuapp.com/mag");
+                    mapdashPageSet = false;
+                    setTitle("Magnetometer");
+                    dl.closeDrawers();
+                }
+                else if (id == R.id.dash){
+                    webview.loadUrl("https://mysterious-spire-66642.herokuapp.com/dash");
+                    mapdashPageSet = true;
+                    setTitle("Dashboard");
                     dl.closeDrawers();
                 }
                 return true;
@@ -84,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                         webview = (WebView) findViewById(R.id.webview);
                         webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
                         webview.getSettings().setJavaScriptEnabled(true);
-                        if(mapPageSet == false){
+                        if(mapdashPageSet == false){
                             webview.reload();
                         }
                     }
@@ -97,4 +126,5 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         return toggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
+
 }

@@ -4,12 +4,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/back2"
+    android:backgroundTint="@color/colorAccent"
+    android:backgroundTintMode="multiply"
     tools:context=".Splashscreen">
 
    <ImageView
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:src="@drawable/ss_vehicle"
-       android:background="@color/design_default_color_primary"/>
+       android:id="@+id/globe"
+       android:layout_width="298dp"
+       android:layout_height="0dp"
+       android:layout_marginTop="232dp"
+       android:layout_marginBottom="199dp"
+       android:src="@drawable/ic_worldwide"
+       app:layout_constraintBottom_toTopOf="@+id/progressBar"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.5"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent" />
+
+   <ImageView
+       android:id="@+id/carSS"
+       android:layout_width="163dp"
+       android:layout_height="199dp"
+       android:src="@drawable/ic_car"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent" />
+
+
+   <ImageView
+       android:id="@+id/locSS"
+       android:layout_width="50dp"
+       android:layout_height="0dp"
+       android:layout_marginTop="168dp"
+       android:layout_marginBottom="483dp"
+       android:src="@drawable/location_animation"
+       app:layout_constraintBottom_toTopOf="@+id/progressBar"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent" />
+
+   <WebView
+       android:id="@+id/webviewload"
+       android:layout_width="0dp"
+       android:layout_height="0dp"
+       app:layout_constraintBottom_toTopOf="@id/globe"
+       app:layout_constraintEnd_toStartOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"></WebView>
+
+   <ProgressBar
+       android:id="@+id/progressBar"
+       style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+       android:layout_width="0dp"
+       android:layout_height="wrap_content"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/locSS" />
+
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Version: Alpha-2.18.2"/>
+
 
 </android.support.constraint.ConstraintLayout>

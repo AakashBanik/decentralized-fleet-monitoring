@@ -4,6 +4,6 @@ from time import sleep
 from sendNotification import sendNotificationtoDevice
 
 while True:
+
 	update_firebase()
-	sendNotificationtoDevice()
 	sleep(5)

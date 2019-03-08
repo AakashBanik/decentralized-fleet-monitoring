@@ -5,6 +5,7 @@ var express = require('express')
 var app = express()
 var humidity = []
 var Temperature = []
+var time = []
 var lat = -34.397
 var long = 150.644
 var mapsApiKey = 'AIzaSyBasFPXZ4mm6Wh_GJestTeZZF8ZMs6wxuc'
@@ -45,9 +46,10 @@ ref.on("value", (snapshot) => {
     console.log(`Todays Date: ${todaysDate}\n`)
     data.forEach(element => {
       if (element['date'] === todaysDate) {
-        console.log(`Humidity: ${element['humidity']}, Temperature: ${element['temp']}`)
+        console.log(`Humidity: ${element['humidity']}, Temperature: ${element['temp']}, Time: ${element['time'].toString()}`)
         humidity.push(element['humidity'])
         Temperature.push(element['temp'])
+        time.push(element['time'])
       }
     });
   });
@@ -83,9 +85,30 @@ app.get('/vib', (req, res) => {
   })
 })
 
-app.get('/pre', (req, res) => {
-  res.render('pressure.hbs', {
+app.get('/gyp', (req, res) => {
+  res.render('gyro.hbs', {
     date: new Date().toISOString().slice(0, 10).toString(),
+  })
+})
+
+app.get('/acc', (req, res) => {
+  res.render('acceleration.hbs', {
+    date: new Date().toISOString().slice(0, 10).toString(),
+  })
+})
+
+app.get('/mag', (req, res) => {
+  res.render('magnet.hbs', {
+    date: new Date().toISOString().slice(0, 10).toString(),
+  })
+})
+
+app.get('/dash', (req, res) => {
+  res.render('dash.hbs', {
+    humidity: humidity, 
+    date: new Date().toISOString().slice(0, 10).toString(),
+    time: time,
+     temp: Temperature
   })
 })
 
