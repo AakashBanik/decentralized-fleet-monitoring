@@ -1,0 +1,6 @@
+firebase
+cryptography
+mpu6050
+smbus
+geopy
+pynmea2

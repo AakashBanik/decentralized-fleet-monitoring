@@ -38,23 +38,23 @@ public class UpdateService extends Service {
         return null;
     }
 
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        String input = intent.getStringExtra("updateService");
-
-        Intent notificationIntent = new Intent(this, Splashscreen.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-
-        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle("Update Service")
-                .setContentText("Background Update service has started for the Application")
-                .setSmallIcon(R.drawable.icon)
-                .setContentIntent(pendingIntent)
-                .build();
-        startForeground(1, notification);
-
-        return START_NOT_STICKY;
-    }
+//    @Override
+//    public int onStartCommand(Intent intent, int flags, int startId) {
+//        String input = intent.getStringExtra("updateService");
+//
+//        Intent notificationIntent = new Intent(this, Splashscreen.class);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+//
+//        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+//                .setContentTitle("Update Service")
+//                .setContentText("Background Update service has started for the Application")
+//                .setSmallIcon(R.drawable.icon)
+//                .setContentIntent(pendingIntent)
+//                .build();
+//        startForeground(2, notification);
+//
+//        return START_NOT_STICKY;
+//    }
 
     @Override
     public void onCreate() {

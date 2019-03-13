@@ -1,19 +1,20 @@
 from firebase import firebase
 
-import urllib2, urllib, httplib
 import json
-import os 
+import os
+from getAcclGyrData import getAccelGryData 
 from functools import partial
-from getValues import get_data
 from datetime import datetime, date
 from sendNotification import sendNotificationtoDevice
+from gps import getGPS
 
 firebase = firebase.FirebaseApplication('https://my-pi-12.firebaseio.com/', None)
 
 def update_firebase():
-	temp, hum = get_data()
-	data = {"temp": temp, "humidity": hum, "date": date.today(), "time": datetime.now().strftime('%H:%M:%S')}
-	print('Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(temp, hum))
-	sendNotificationtoDevice(temp, hum)
-	firebase.post('/sensor/dht', data)
+	accl, gyro, temp = getAccelGryData()
+	lat, lng, speed = getGPS()
+	data = {"temp": temp, "Acceleration": accl, "Gyroscope": gyro,  "date": date.today(), "latitude": lat, "longitude": lng, "speed": speed, "time": datetime.now().strftime('%H:%M:%S')}
+	print('Temp={0:0.1f}*C, Acceleration={1:0.1f}m/s2, Gyroscope={2:0.1f}rad/s, Speed: {3}, Latitude: {4}, Longitude: {5}'.format(temp, accl, gyro, speed, lat, lng))
+	sendNotificationtoDevice(speed, lat, lng)
+	firebase.post('/sensor/raspberry', data)
 	

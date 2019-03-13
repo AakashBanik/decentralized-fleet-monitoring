@@ -10,10 +10,10 @@ app.use(bodyParser.json());
 
 app.post('/notify', (req, res) => {
 
-    if (req.body.temp != "" && req.body.hum != "") {
+    if (req.body.temp != "" && req.body.accl != "" && req.body.gyro != "") {
         if (req.body.temp > 25) {
             console.log('Temp too high');
-            fcm.firebaseMessage(req.body.temp, req.body.hum);
+            fcm.firebaseMessage(req.body.temp, req.body.accl, req.body.gyro);
         } else {
             console.log('Temperatures are perfect');
     

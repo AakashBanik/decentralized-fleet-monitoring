@@ -1,67 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:id="@+id/useless">
-        <item
-            android:id="@+id/temp"
-            android:title="Temperature"
-            android:icon="@drawable/temperature">
+    <item android:title="Useless">
+        <menu>
+            <group android:id="@+id/useless">
+                <item
+                    android:id="@+id/temp"
+                    android:title="Temperature"
+                    android:icon="@drawable/temperature">
 
-        </item>
+                </item>
+                <item
+                    android:id="@+id/vibration"
+                    android:title="Vibration"
+                    android:icon="@drawable/vibration_sensor">
 
-        <item
-            android:id="@+id/hum"
-            android:title="Humidity"
-            android:icon="@drawable/humidity">
+                </item>
+                <item
+                    android:id="@+id/speed"
+                    android:title="Speed"
+                    android:icon="@drawable/speed">
 
-        </item>
+                </item>
+            </group>
+        </menu>
+    </item>
 
-        <item
-            android:id="@+id/vibration"
-            android:title="Vibration"
-            android:icon="@drawable/vibration_sensor">
+    <item android:title="9-Axis Motion">
+        <menu>
+            <group android:id="@+id/important">
+                <item
+                    android:id="@+id/magnet"
+                    android:title="Magnetometer"
+                    android:icon="@drawable/mag">
 
-        </item>
-    </group>
+                </item>
 
-    <group android:id="@+id/important">
-        <item
-            android:id="@+id/magnet"
-            android:title="Magnetometer"
-            android:icon="@drawable/mag">
+                <item
+                    android:id="@+id/acceleration"
+                    android:title="Acclerometer"
+                    android:icon="@drawable/acc">
 
-        </item>
+                </item>
 
-        <item
-            android:id="@+id/acceleration"
-            android:title="Acclerometer"
-            android:icon="@drawable/acc">
+                <item
+                    android:id="@+id/gyroscope"
+                    android:title="Gyroscope"
+                    android:icon="@drawable/gyro">
 
-        </item>
+                </item>
+            </group>
+        </menu>
+    </item>
 
-        <item
-            android:id="@+id/gyroscope"
-            android:title="Gyroscope"
-            android:icon="@drawable/gyro">
+    <item android:title="Dashboard &amp; Location">
+        <menu>
+            <group android:id="@+id/locationservices">
+                <item
+                    android:id="@+id/location"
+                    android:title="Car Location"
+                    android:icon="@drawable/car_location">
+                </item>
+                <item
+                    android:id="@+id/dash"
+                    android:title="Dashboard"
+                    android:icon="@drawable/dash">
+                </item>
+            </group>
+        </menu>
+    </item>
 
-        </item>
-    </group>
-
-    <group android:id="@+id/locationservices">
-        <item
-            android:id="@+id/location"
-            android:title="Car Location"
-            android:icon="@drawable/car_location">
-
-        </item>
-    </group>
-
-    <group android:id="@+id/viewportservices">
-        <item
-            android:id="@+id/dash"
-            android:title="Dashboard"
-            android:icon="@drawable/dash">
-
-        </item>
-    </group>
 </menu>

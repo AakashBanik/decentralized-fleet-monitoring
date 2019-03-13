@@ -9,12 +9,12 @@ var serviceAccount = require("./serviceKey.json");
 var serverKey = "fTQiLcDqzLY:APA91bHNVY8ykX1v-d_q2aKZluEpsuZF1UpGJttGe93sCMgrJ7RFN8v8x9-SlRZsu4kfn6uH4klfZ3XB39rEaq3_lPTsHbY1oos4iquoSjNFCEouiEipypIySatrw0rXHudwWd4T4ZZc";
 
 
-module.exports.firebaseMessage = (temp, hum) => {
+module.exports.firebaseMessage = (temp, accl, gyro) => {
 
     var message = {
         notification: {
             title: 'Critical',
-            body: `Temperature: ${temp} and Humidity : ${hum}`,
+            body: `Temperature: ${temp}, Acceleration: ${accl}, Angular Velocity: ${gyro}`,
         }
     };
 

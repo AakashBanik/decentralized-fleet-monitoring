@@ -3,18 +3,20 @@ var hbs = require('hbs')
 var express = require('express')
 
 var app = express()
-var humidity = []
+var accl = []
+var gyro = []
 var Temperature = []
 var time = []
-var lat = -34.397
-var long = 150.644
+var lat = []
+var lng = []
+var speed = []
 var mapsApiKey = 'AIzaSyBasFPXZ4mm6Wh_GJestTeZZF8ZMs6wxuc'
 
 const port = process.env.PORT || 3000;
 
 app.set('view engine', 'hbs')
-hbs.registerPartials(__dirname + '/views/partials')
-app.use(express.static(__dirname + '/server/public'))
+app.use('/public',express.static(__dirname + "/public"));
+app.use('/scripts',express.static(__dirname + "/scripts"));
 
 var config = {
   apiKey: "AIzaSyDG-o-5zgeJJXw_5waQ9nF4caatbzHVZx0",
@@ -27,7 +29,7 @@ var config = {
 
 firebase.initializeApp(config);
 var db = firebase.database();
-var ref = db.ref("sensor/dht");
+var ref = db.ref("sensor/raspberry");
 
 ref.on("value", (snapshot) => {
 
@@ -46,10 +48,14 @@ ref.on("value", (snapshot) => {
     console.log(`Todays Date: ${todaysDate}\n`)
     data.forEach(element => {
       if (element['date'] === todaysDate) {
-        console.log(`Humidity: ${element['humidity']}, Temperature: ${element['temp']}, Time: ${element['time'].toString()}`)
-        humidity.push(element['humidity'])
+        console.log(`Acceleration: ${element['Acceleration']}, Temperature: ${element['temp']}, Angular Velocity: ${element['Gyroscope']} Time: ${element['time'].toString()}`)
+        accl.push(element['Acceleration'])
+        gyro.push(element['Gyroscope'])
         Temperature.push(element['temp'])
         time.push(element['time'])
+        lat.push(element['latitude'])
+        lng.push(element['longitude'])
+        speed.push(element['speed']*1.852)
       }
     });
   });
@@ -60,55 +66,58 @@ ref.on("value", (snapshot) => {
 app.get('/temp', (req, res) => {
   res.render('temp.hbs', {
     date: new Date().toISOString().slice(0, 10).toString(),
-    temp: Temperature[Temperature.length - 1]
-  })
-})
-
-app.get('/hum', (req, res) => {
-  res.render('hum.hbs', {
-    date: new Date().toISOString().slice(0, 10).toString(),
-    humidity: humidity[humidity.length - 1]
+    temp: Temperature[Temperature.length - 1].toFixed(2),
+    color: color = (Temperature[Temperature.length - 1] > 35) ? "red" : "orange"//#4CAF50"
   })
 })
 
 app.get('/map', (req, res) => {
   res.render('maps.hbs', {
-    lat: lat,
-    long: long,
+    lat: lat[lat.length - 1],
+    lng: lng[lng.length - 1],
     apiKey: mapsApiKey
   })
 })
 
 app.get('/vib', (req, res) => {
   res.render('vibration.hbs', {
-    date: new Date().toISOString().slice(0, 10).toString(),
   })
 })
 
-app.get('/gyp', (req, res) => {
+app.get('/gyro', (req, res) => {
   res.render('gyro.hbs', {
-    date: new Date().toISOString().slice(0, 10).toString(),
+    gyro: gyro[gyro.length - 1].toFixed(2),
+    color: color = (Temperature[Temperature.length - 1] > 35) ? "red" : "orange"
   })
 })
 
 app.get('/acc', (req, res) => {
   res.render('acceleration.hbs', {
-    date: new Date().toISOString().slice(0, 10).toString(),
+    accl: accl[accl.length - 1].toFixed(2),
+    color: color = (Temperature[Temperature.length - 1] > 35) ? "red" : "orange"
+  })
+})
+
+app.get('/speed', (req, res) => {
+  res.render('speed.hbs', {
+    speed: speed[speed.length - 1].toFixed(2),
+    color: color = (Temperature[Temperature.length - 1] > 35) ? "red" : "orange"
   })
 })
 
 app.get('/mag', (req, res) => {
   res.render('magnet.hbs', {
-    date: new Date().toISOString().slice(0, 10).toString(),
   })
 })
 
 app.get('/dash', (req, res) => {
   res.render('dash.hbs', {
-    humidity: humidity, 
-    date: new Date().toISOString().slice(0, 10).toString(),
+    accl: accl,
+    gyro: gyro,
     time: time,
-     temp: Temperature
+    temp: Temperature,
+    lat: lat,
+    lng: lng
   })
 })
 

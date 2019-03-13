@@ -1,5 +1,4 @@
 package com.example.fleetmonitoring;
-import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -12,8 +11,6 @@ import android.os.Bundle;
 
 import com.google.firebase.FirebaseApp;
 
-
-import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -23,15 +20,11 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle toggle;
     private NavigationView nv;
     private boolean mapdashPageSet = false;
-    String packagePath = "/storage/emulated/0/Download/app-debug.apk";
-    File file = new File(packagePath);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        PackageManager pm = getPackageManager();
 
         webview = (WebView) findViewById(R.id.webview);
         webview.getSettings().setJavaScriptEnabled(true);
@@ -50,13 +43,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int id = menuItem.getItemId();
-                if (id == R.id.hum){
-                    webview.loadUrl("https://mysterious-spire-66642.herokuapp.com/hum");
-                    mapdashPageSet = false;
-                    setTitle("Humidity");
-                    dl.closeDrawers();
-                }
-                else if (id == R.id.temp){
+                if (id == R.id.temp){
                     webview.loadUrl("https://mysterious-spire-66642.herokuapp.com/temp");
                     mapdashPageSet = false;
                     setTitle("Temperature");
@@ -81,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                     dl.closeDrawers();
                 }
                 else if (id == R.id.gyroscope){
-                    webview.loadUrl("https://mysterious-spire-66642.herokuapp.com/gyp");
+                    webview.loadUrl("https://mysterious-spire-66642.herokuapp.com/gyro");
                     mapdashPageSet = false;
                     setTitle("Gyroscope");
                     dl.closeDrawers();
@@ -96,6 +83,12 @@ public class MainActivity extends AppCompatActivity {
                     webview.loadUrl("https://mysterious-spire-66642.herokuapp.com/dash");
                     mapdashPageSet = true;
                     setTitle("Dashboard");
+                    dl.closeDrawers();
+                }
+                else if (id == R.id.speed){
+                    webview.loadUrl("https://mysterious-spire-66642.herokuapp.com/speed");
+                    mapdashPageSet = false;
+                    setTitle("Speed");
                     dl.closeDrawers();
                 }
                 return true;

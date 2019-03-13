@@ -6,8 +6,8 @@ android {
         applicationId "com.example.fleetmonitoring"
         minSdkVersion 24
         targetSdkVersion 28
-        versionCode 18
-        versionName "Alpha-2"
+        versionCode 20
+        versionName "Alpha-4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
