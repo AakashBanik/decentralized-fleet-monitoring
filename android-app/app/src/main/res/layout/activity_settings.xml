@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".Settings">
+
+    <android.support.v7.widget.SwitchCompat
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Turn off Auto Updates"
+        android:id="@+id/updateSwitch"
+        android:textColor="@color/white"
+        android:textSize="8pt"
+        />
+
+    <android.support.v7.widget.SwitchCompat
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Turn off Update Notifications"
+        android:id="@+id/updateNotificationSwitch"
+        android:textColor="@color/white"
+        android:textSize="8pt"
+        />
+
+    <android.support.v7.widget.SwitchCompat
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="All App Dark Mode"
+        android:id="@+id/darkMode"
+        android:textColor="@color/white"
+        android:textSize="8pt"
+        />
+
+    <android.support.v7.widget.SwitchCompat
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Turn off app loading delay"
+        android:id="@+id/loading"
+        android:textColor="@color/white"
+        android:textSize="8pt"
+        />
+
+    <android.support.v7.widget.SwitchCompat
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Use Firebase Mobile Min Engine"
+        android:id="@+id/engine"
+        android:textColor="@color/white"
+        android:textSize="8pt"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Dev Settings 1.22.5"
+        android:textColor="@color/white"
+        android:gravity="center"></TextView>
+
+
+
+</LinearLayout>

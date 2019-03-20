@@ -3,6 +3,7 @@ package com.example.fleetmonitoring;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
@@ -18,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import static com.example.fleetmonitoring.Settings.SHARED_PREF_NAME;
+
 
 public class Splashscreen extends AppCompatActivity {
 
@@ -26,9 +29,9 @@ public class Splashscreen extends AppCompatActivity {
     ImageView carSS;
     ImageView locSS;
     Animation fromtop;
-    WebView webviewload;
     ProgressBar progressBar;
     int GET_PERMISSION = 1;
+    Boolean switchLoading;
 
     //variables end
 
@@ -38,10 +41,8 @@ public class Splashscreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
 
-        //Webview
-        webviewload = (WebView) findViewById(R.id.webviewload);
-        webviewload.loadUrl("https://mysterious-spire-66642.herokuapp.com/temp");
-        //webview ends
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+        switchLoading= sharedPreferences.getBoolean("Loading", false);
 
         //animation area
         carSS = (ImageView) findViewById(R.id.carSS);
@@ -58,16 +59,16 @@ public class Splashscreen extends AppCompatActivity {
         if(!getPermissions(this, Permissions)){
             ActivityCompat.requestPermissions(this, Permissions, GET_PERMISSION);
         } else{
-           init();
+           init(switchLoading);
            startJob();
         }
 
     }
 
     //for progress bar animation
-    public void progressAnimation() {
+    public void progressAnimation(int loadingDelay) {
         ProgressBarAnimation anim = new ProgressBarAnimation(this, progressBar, 0, 100f);
-        anim.setDuration(4500);
+        anim.setDuration(loadingDelay);
         progressBar.setAnimation(anim);
     }
     //progress bar animation ends
@@ -88,14 +89,14 @@ public class Splashscreen extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            init(switchLoading);
             startJob();
-            init();
         }
     }
 
     //Permissions End
 
-    private void init(){
+    private void init(Boolean loadingToDo){
 
         //Progress Bar Area
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -103,9 +104,14 @@ public class Splashscreen extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         progressBar.getProgressDrawable().setColorFilter(
                 Color.rgb(238, 130, 238), android.graphics.PorterDuff.Mode.SRC_IN);
+//        Color.rgb(238, 130, 238)
         progressBar.setMax(100);
         progressBar.setScaleY(3f);
-        progressAnimation();
+        if(!loadingToDo){
+            progressAnimation(4500);
+        } else{
+            progressAnimation(500);
+        }
         //Progress Bar Area Ends
     }
 

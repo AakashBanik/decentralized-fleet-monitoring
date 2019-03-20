@@ -26,6 +26,18 @@
         </menu>
     </item>
 
+    <item android:title="Min Engine Component">
+        <menu>
+            <group android:id="@+id/engineComponent">
+                <item android:id="@+id/main"
+                    android:title="Min Components"
+                    android:icon="@drawable/main">
+
+                </item>
+            </group>
+        </menu>
+    </item>
+
     <item android:title="9-Axis Motion">
         <menu>
             <group android:id="@+id/important">
@@ -65,6 +77,18 @@
                     android:id="@+id/dash"
                     android:title="Dashboard"
                     android:icon="@drawable/dash">
+                </item>
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Settings">
+        <menu>
+            <group android:id="@+id/settingsGroup">
+                <item
+                    android:id="@+id/settings"
+                    android:title="Dev Settings"
+                    android:icon="@drawable/settings">
                 </item>
             </group>
         </menu>

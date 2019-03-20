@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -22,7 +23,8 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 
-import static com.example.fleetmonitoring.ForegroundUpdateService.CHANNEL_ID;
+import static com.example.fleetmonitoring.App.NOTIFICATION_CHANNEL_ID;
+import static com.example.fleetmonitoring.Settings.SHARED_PREF_NAME;
 
 public class UpdateService extends Service {
 
@@ -31,6 +33,7 @@ public class UpdateService extends Service {
     private PackageInfo pi;
     String packagePath = "/storage/emulated/0/Download/app-debug.apk";
     File downloadFile = new File(packagePath);
+    Boolean switchUpdateState, switchNotificationState;
 
     @Nullable
     @Override
@@ -38,42 +41,26 @@ public class UpdateService extends Service {
         return null;
     }
 
-//    @Override
-//    public int onStartCommand(Intent intent, int flags, int startId) {
-//        String input = intent.getStringExtra("updateService");
-//
-//        Intent notificationIntent = new Intent(this, Splashscreen.class);
-//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-//
-//        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-//                .setContentTitle("Update Service")
-//                .setContentText("Background Update service has started for the Application")
-//                .setSmallIcon(R.drawable.icon)
-//                .setContentIntent(pendingIntent)
-//                .build();
-//        startForeground(2, notification);
-//
-//        return START_NOT_STICKY;
-//    }
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+        switchUpdateState = sharedPreferences.getBoolean("Update", false);
+        switchNotificationState = sharedPreferences.getBoolean("Notification", false);
+
+        if(!switchNotificationState == true){
+            notificationProcess();
+        }
+        return START_STICKY;
+    }
 
     @Override
     public void onCreate() {
-        //google firebase
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference();
-        StorageReference pathReference = storageRef.child("app-debug.apk");
-        Toast.makeText(UpdateService.this, "Checking preliminary Files Before Update", Toast.LENGTH_SHORT).show();
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+        switchUpdateState = sharedPreferences.getBoolean("Update", false);
 
-        pathReference.getFile(downloadFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                //Toast.makeText(Splashscreen.this, "Checking Preliminary Files", Toast.LENGTH_SHORT).show();
-                Log.d("UpdateDownloaded", "update downloaded to " + packagePath);
-                updateProcess();
-            }
-        });
-
-        //firebase && storage access ends
+        if(!switchUpdateState == true){
+            firebaseUpdateProcess();
+        }
     }
 
     @Override
@@ -85,6 +72,38 @@ public class UpdateService extends Service {
     public void onTaskRemoved(Intent rootIntent) {
         downloadFile.delete();
         stopSelf();
+    }
+
+    private void firebaseUpdateProcess(){
+        //google firebase
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        StorageReference pathReference = storageRef.child("app-debug.apk");
+        Toast.makeText(UpdateService.this, "Checking preliminary Files Before Update", Toast.LENGTH_SHORT).show();
+
+        pathReference.getFile(downloadFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                Log.d("UpdateDownloaded", "update downloaded to " + packagePath);
+                updateProcess();
+            }
+        });
+
+        //firebase && storage access ends
+    }
+
+    private void notificationProcess(){
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,
+                0, notificationIntent, 0);
+
+        Notification notification = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+                .setContentTitle("Update Service")
+                .setContentText("Update Service for the Application")
+                .setSmallIcon(R.drawable.icon)
+                .setContentIntent(pendingIntent)
+                .build();
+        startForeground(1, notification);
     }
 
     private void updateProcess(){

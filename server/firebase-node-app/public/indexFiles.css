@@ -1,0 +1,76 @@
+  .showtemp{
+
+        width: 400px;
+        height: 200px;
+
+        margin: 20px auto;
+        background-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        color:black; 
+        font-family: Verdana, Geneva, Tahoma, sans-serif; 
+        font-size:15pt;
+        border: 2px solid white;
+    }
+    .showspeed{
+
+        width: 400px;
+        height: 200px;
+        margin: 20px auto;
+        background-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        color:black; 
+        font-family: Verdana, Geneva, Tahoma, sans-serif; 
+        font-size:15pt;
+        border: 2px solid white;
+    }
+    .showvib{
+
+        width: 400px;
+        height: 200px;
+        margin: 20px auto;
+        background-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        color:black; 
+        font-family: Verdana, Geneva, Tahoma, sans-serif; 
+        font-size:15pt;
+        border: 2px solid white;
+    }
+    .showmag{
+
+        width: 400px;
+        height: 200px;
+        margin: 20px auto;
+        background-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        color:black; 
+        font-family: Verdana, Geneva, Tahoma, sans-serif; 
+        font-size:15pt;
+        border: 2px solid white;
+    }
+    .showgyro{
+
+        width: 400px;
+        height: 200px;
+        margin: 20px auto;
+        background-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        color:black; 
+        font-family: Verdana, Geneva, Tahoma, sans-serif; 
+        font-size:15pt;
+        border: 2px solid white;
+    }
+
+
+
+    /* .bodyBackground{
+        /*background-image: url('/images/8478.jpg');
+        background-image: linear-gradient(to right, green, white);
+    } */
+
+    .value{
+        font-family:'Courier New', Courier, monospace;
+        font-size: 35pt;
+        color:black;
+    }
+
+    

@@ -2,4 +2,5 @@
     <string name="app_name">Vehicle Monitoring</string>
     <string name="Open">open</string>
     <string name="Close">close</string>
+    <string name="channel_name">Vehicle Monitoring Update Channel</string>
 </resources>

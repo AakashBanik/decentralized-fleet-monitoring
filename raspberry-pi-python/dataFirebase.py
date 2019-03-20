@@ -15,6 +15,6 @@ def update_firebase():
 	lat, lng, speed = getGPS()
 	data = {"temp": temp, "Acceleration": accl, "Gyroscope": gyro,  "date": date.today(), "latitude": lat, "longitude": lng, "speed": speed, "time": datetime.now().strftime('%H:%M:%S')}
 	print('Temp={0:0.1f}*C, Acceleration={1:0.1f}m/s2, Gyroscope={2:0.1f}rad/s, Speed: {3}, Latitude: {4}, Longitude: {5}'.format(temp, accl, gyro, speed, lat, lng))
-	sendNotificationtoDevice(speed, lat, lng)
+	#sendNotificationtoDevice(speed, lat, lng)
 	firebase.post('/sensor/raspberry', data)
 	

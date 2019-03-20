@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="indexFiles.css">
+    </head>
+    <body id="body">
+        <script>
+            var dom = document.getElementById('body');
+            function getCssValuePrefix()
+            {
+                var rtrnVal = '';
+                var prefixes = ['-o-', '-ms-', '-moz-', '-webkit-'];                      
+
+                for (var i = 0; i < prefixes.length; i++)
+                {
+                    // Attempt to set the style
+                    dom.style.background = prefixes[i] + 'linear-gradient(to right, #000000, #ffffff)';
+
+                    // Detect if the style was successfully set
+                    if (dom.style.background)
+                    {
+                        rtrnVal = prefixes[i];
+                    }
+                }
+
+                dom = null;
+                delete dom;
+
+                return rtrnVal;
+            }
+            dom.style.backgroundImage = getCssValuePrefix() + 'linear-gradient(to right,'+"{{color1}}"+', {{color2}})';
+        </script>
+        <center>
+            <div class="parent">
+                <div class="showtemp">
+                    <h3>Temperature</h3> 
+                    <hr style="width:250px;">
+                    <h1 class="value">{{temp}}&deg;C</h1>
+                </div>
+                <div class="showvib">
+                    <h3>Measured Acceleration</h3> 
+                    <hr style="width:250px;">
+                    <h1 class="value">{{accl}} m/s<sup>2</sup></h1>
+                </div>
+                <div class="showspeed">
+                    <h3>Speed</h3> 
+                    <hr style="width:250px;">
+                    <h1 class="value">{{speed}} kph</sup></h1>
+                </div>
+            </div>
+        </center>
+    </body>
+</html>
