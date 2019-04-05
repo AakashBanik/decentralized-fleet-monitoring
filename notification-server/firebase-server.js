@@ -1,20 +1,60 @@
 var admin = require("firebase-admin");
 
-var serviceAccount = require("./serviceKey.json");
+var serviceAccount = require("./keyfile.json");
     admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://mobile-storage-e3c39.firebaseio.com"
+    databaseURL: "https://my-pi-12.firebaseio.com"
 });
 
-var serverKey = "fTQiLcDqzLY:APA91bHNVY8ykX1v-d_q2aKZluEpsuZF1UpGJttGe93sCMgrJ7RFN8v8x9-SlRZsu4kfn6uH4klfZ3XB39rEaq3_lPTsHbY1oos4iquoSjNFCEouiEipypIySatrw0rXHudwWd4T4ZZc";
+var serverKey = "fWCFVeXABx8:APA91bF8EzYZ48y3QVOMZZGeDNW47HPHhPE2FVKPMacj_B5kRlk1ZpIRBC-KjnRXNLk6q51fPxG1uewZN9mCF21kUtuEGvtUs_J8ZTts0dNQBhOmAdXtJc8vqOT_zjqACJxvJtkDQF0-";
 
 
-module.exports.firebaseMessage = (temp, accl, gyro) => {
+module.exports.firebaseMessage = (temp, speed, accl, lat, lng, msg) => {
 
+    
+    if (temp != "") {
+        var message = `${msg}. Temperature: ${temp} . Latitude: ${lat} and Longitude: ${lng}`;
+        sendMessage(message);
+        if (speed != "") {
+            var message = `${msg}. Speed: ${speed} . Latitude: ${lat} and Longitude: ${lng}`;
+            sendMessage(message);
+        }
+        else if (accl != "") {
+            var message = `${msg}. Acceleration: ${accl} . Latitude: ${lat} and Longitude: ${lng}`;
+            sendMessage(message);
+        }
+    }
+    else if (speed != "") {
+        var message = `${msg}. Speed: ${speed} . Latitude: ${lat} and Longitude: ${lng}`;
+        sendMessage(message);
+        if (temp != "") {
+            var message = `${msg}. Temperature: ${temp} . Latitude: ${lat} and Longitude: ${lng}`;
+            sendMessage(message);
+        } else if (accl != "") {
+            var message = `${msg}. Acceleration: ${accl} . Latitude: ${lat} and Longitude: ${lng}`;
+            sendMessage(message);
+        }
+    }
+    else if (accl != "") {
+        var message = `${msg}. Acceleration: ${accl} . Latitude: ${lat} and Longitude: ${lng}`;
+        sendMessage(message);
+        if (temp != "") {
+            var message = `${msg}. Temperature: ${temp} . Latitude: ${lat} and Longitude: ${lng}`;
+            sendMessage(message);
+        } else if (speed != "") {
+            var message = `${msg}. Speed: ${speed} . Latitude: ${lat} and Longitude: ${lng}`;
+            sendMessage(message);
+        }
+    }
+    
+    
+}
+
+function sendMessage(message) {
     var message = {
         notification: {
             title: 'Critical',
-            body: `Temperature: ${temp}, Acceleration: ${accl}, Angular Velocity: ${gyro}`,
+            body: message,
         }
     };
 

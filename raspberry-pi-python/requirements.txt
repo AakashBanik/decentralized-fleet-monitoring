@@ -4,3 +4,6 @@ mpu6050
 smbus
 geopy
 pynmea2
+tweetnacl
+tweetnacl-util
+base64-to-uint8array

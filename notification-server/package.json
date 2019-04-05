@@ -18,8 +18,12 @@
   },
   "homepage": "https://github.com/SudeshBanik/notification-server#readme",
   "dependencies": {
+    "base64-to-uint8array": "^1.0.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "firebase-admin": "^7.0.0"
+    "firebase": "^5.9.1",
+    "firebase-admin": "^7.0.0",
+    "tweetnacl": "^1.0.1",
+    "tweetnacl-util": "^0.15.0"
   }
 }

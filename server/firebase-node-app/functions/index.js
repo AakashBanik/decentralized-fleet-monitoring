@@ -2,6 +2,7 @@ const functions = require('firebase-functions');
 var firebase = require("firebase");
 var hbs = require('hbs')
 var express = require('express')
+var decrypt = require('./decrypt_data')
 
 var app = express()
 var accl = []
@@ -50,14 +51,16 @@ ref.on("value", (snapshot) => {
     console.log(`Todays Date: ${todaysDate}\n`)
     data.forEach(element => {
       if (element['date'] === todaysDate) {
-        console.log(`Acceleration: ${element['Acceleration']}, Temperature: ${element['temp']}, Angular Velocity: ${element['Gyroscope']} Time: ${element['time'].toString()}`)
-        accl.push(element['Acceleration'])
-        gyro.push(element['Gyroscope'])
-        Temperature.push(element['temp'])
+        console.log(`Acceleration: ${decrypt.decrypt_data(element['Acceleration'].toString())}, Temperature: ${decrypt.decrypt_data(element['temp'].toString())}, 
+                    Angular Velocity: ${decrypt.decrypt_data(element['Gyroscope'].toString())} Time: ${element['time'].toString()}`);
+        
+        accl.push(decrypt.decrypt_data(element['Acceleration'].toString()))
+        gyro.push(decrypt.decrypt_data(element['Gyroscope'].toString()))
+        Temperature.push(decrypt.decrypt_data(element['temp'].toString()))
         time.push(element['time'])
-        lat.push(element['latitude'])
-        lng.push(element['longitude'])
-        speed.push(element['speed'])
+        lat.push(decrypt.decrypt_data(element['latitude'].toString()))
+        lng.push(decrypt.decrypt_data(element['longitude'].toString()))
+        speed.push(decrypt.decrypt_data(element['speed'].toString()))
       }
     });
   });

@@ -1,41 +1,38 @@
-@keyframes cardAnimation {
-    0% {transform: scale(1,1);}
-    50% {transform: scale(1.1, 1.1);}
-    100% {transform: scale(1, 1);}
-    /*50% {width: 400px; height: 200px;}
-    75% {width: 450px; height: 250px;}
-    100% {width: 400px; height: 200px;}*/
-    }
-    .show{
+.show{
 
-        width: 400px;
-        height: 200px;
+    width: 400px;
+    height: 200px;
 
-        position: fixed;
-        top:0;
-        bottom: 0;
-        left: 0;
-        right: 0;
+    position: fixed;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 
-        margin: auto;
-        background-color: rgba(255, 255, 255, 0.15);
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        color:black; 
-        font-family: Verdana, Geneva, Tahoma, sans-serif; 
-        font-size:15pt;
-        animation: 0.35s linear .1s cardAnimation;
-        /* border: 2px solid black; */
-        outline: 2px solid black;
-        outline-offset: -5px
-    }
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color:black; 
+    font-family: Verdana, Geneva, Tahoma, sans-serif; 
+    font-size:15pt;
+    animation: 0.35s linear .1s cardAnimation;
+    outline: 2px solid black;
+    outline-offset: -5px
+}
 
     /* .bodyBackground{
         /*background-image: url('/images/8478.jpg');
         background-image: linear-gradient(to right, green, white);
     } */
 
-    .value{
-        font-family:'Courier New', Courier, monospace;
-        font-size: 35pt;
-        color:black;
-    }
+.value{
+    font-family:'Courier New', Courier, monospace;
+    font-size: 35pt;
+    color:black;
+}
+
+@keyframes cardAnimation {
+    0% {transform: scale(1,1);}
+    50% {transform: scale(1.1, 1.1);}
+    100% {transform: scale(1, 1);}
+}
